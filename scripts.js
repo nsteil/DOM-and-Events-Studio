@@ -7,8 +7,11 @@ function execute () {
     const flightButton = document.getElementById("takeoff");
     const landButton = document.getElementById("landing");
     const abortButton = document.getElementById("missionAbort");
-    //const moveButton = document.getElementsByTagName("button");
-    const shuttleIcon = document.getElementsById("rocket");
+    const leftButton = document.getElementById("left");
+    const rightButton = document.getElementById("right");
+    const upButton = document.getElementById("up");
+    const downButton = document.getElementById("down");
+    const shuttleIcon = document.getElementById("rocket");
 
     flightButton.addEventListener("click", function() {
         let response = window.confirm("Confriem that the shuttle is ready for takeoff.")
@@ -24,6 +27,7 @@ function execute () {
         flightStatus.innerHTML = "The shuttle has landed."
         shuttleBackground.style.backgroundColor = "";
         spaceShuttleHeight.innerHTML = 0;
+        shuttleIcon.style.position = "initial"
     });
 
     abortButton.addEventListener("click", function () {
@@ -32,12 +36,39 @@ function execute () {
             flightStatus.innerHTML = "Mission aborted.";
             shuttleBackground.style.backgroundColor = "";
             spaceShuttleHeight.innerHTML = 0;
+            shuttleIcon.style.position = "initial"
         }
     });
 
-    /*moveButton.addEventListener("click", function() {
-        shuttleBackground.style.backgroundColor = "red"
-    })*/
+    leftButton.addEventListener("click", function() {
+        shuttleIcon.style.position = "relative"
+        if (shuttleIcon.style.right !== "290px") {
+        shuttleIcon.style.right = Number(shuttleIcon.style.right.slice(0,-2)) + 10 + "px"
+        }
+    });
+
+    rightButton.addEventListener("click", function() {
+        shuttleIcon.style.position = "relative"
+        if (shuttleIcon.style.right !== "-290px") {
+        shuttleIcon.style.right = Number(shuttleIcon.style.right.slice(0,-2)) - 10 + "px"
+        }
+    });
+
+    upButton.addEventListener("click", function() {
+        shuttleIcon.style.position = "relative"
+        if (shuttleIcon.style.top !== "0px") {
+        shuttleIcon.style.top = Number(shuttleIcon.style.top.slice(0,-2)) - 10 + "px"
+        spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) + 10000;
+        }
+    });
+
+    downButton.addEventListener("click", function() {
+        shuttleIcon.style.position = "relative"
+        if (shuttleIcon.style.top !== "250px") {
+        shuttleIcon.style.top = Number(shuttleIcon.style.top.slice(0,-2)) + 10 + "px"
+        spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) - 10000
+        }
+    });
 }
 
 window.addEventListener("load", execute)
